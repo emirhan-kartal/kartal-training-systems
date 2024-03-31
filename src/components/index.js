@@ -6,3 +6,16 @@ export { default as WeeklyWorkoutSchedule } from "./WeeklyWorkoutSchedule";
 export { default as ContentCard } from "./ContentCard";
 export { default as Dashboard } from "./pages/Dashboard";
 export { default as Workouts } from "./pages/Workouts";
+export { default as WorkoutDetails } from "./pages/WorkoutDetails";
+export { default as Settings } from "./pages/Settings";
+export { default as ProfilePageButton } from "./ProfilePageButton";
+
+export { default as withAuth } from "./withAuth";
+export { default as LoginPage } from "./pages/LoginPage";
+export { default as Input } from "./Input";
+export { default as AdminUserList } from "./AdminUserList";
+export { default as AdminWorkoutList } from "./AdminWorkoutList";
+export { default as AdminWorkoutDetails } from "./AdminWorkoutDetails";
+export { default as RegisterPage } from "./pages/RegisterPage";
+export { default as AdminPanel } from "./pages/AdminPanel";
+export { default as InputCard } from "./InputCard";

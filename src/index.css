@@ -6,4 +6,12 @@
     .today {
         @apply bg-blue-500 text-white;
     }
+    .admin-panel-button {
+        @apply group-hover:bg-[#3DC9F5] group-hover:text-white h-12 transition duration-300 rounded-2xl flex items-center;
+    }
 }
+
+.bg-gradient-custom {
+    @apply bg-blue-900;
+    background: linear-gradient(180deg, rgba(24,43,66,1) 15%, rgba(22,34,54,1) 35%, rgba(19,26,44,1) 54%);
+  }
