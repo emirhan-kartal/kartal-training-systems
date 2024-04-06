@@ -10,12 +10,15 @@ import {
 import Button from "../Button";
 import { CurrentPageProvider } from "../CurrentPageContext";
 import withAuth from "../withAuth";
+import { useNavigate } from "react-router-dom";
 
 const AdminPanel = ({ children }) => {
     const [chosenButton, setChosenButton] = useState();
+    const navigate = useNavigate();
     const handleClick = (text) => {
         console.log(text);
         setChosenButton(text);
+        
     };
 
     return (
@@ -35,7 +38,11 @@ const AdminPanel = ({ children }) => {
                             text="Clients"
                             icon={faUser}
                             chosen={chosenButton === "Clients"}
-                            onClick={handleClick}
+                            onClick={() => {
+                                handleClick("Clients");
+                                navigate("/admin/")
+
+                            }}
                             key="Clients"
                         />
                         <Button
@@ -105,8 +112,11 @@ const AdminPanel = ({ children }) => {
                     />
                 </div>
             </div>
-            <main className="col-span-10 p-12 flex flex-col  items-center">
-                <CurrentPageProvider value={{setChosenButton}}> {children}</CurrentPageProvider>
+            <main className="col-span-10 p-12 flex flex-col  items-center ">
+                <CurrentPageProvider value={{setChosenButton}}> 
+                {children}
+                
+                </CurrentPageProvider>
             </main>
         </div>
     );

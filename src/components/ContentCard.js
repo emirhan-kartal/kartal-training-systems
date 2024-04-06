@@ -13,6 +13,7 @@ const ContentCard = ({
     type,
     isCompleted,
     children,
+    split = true,
 }) => {
     return (
         <div
@@ -25,7 +26,7 @@ const ContentCard = ({
         >
             {isCompleted && type === "workout-card" && (
                 <div
-                    className="absolute right-5 text-xl font-bold text-red-special bg-white shadow-xl rounded-3xl w-24 text-center
+                    className="absolute right-10 text-xl font-bold text-white bg-red-special shadow-2xl rounded-3xl w-16 text-center
             "
                 >
                     Done
@@ -37,9 +38,14 @@ const ContentCard = ({
                 children
             ) : (
                 <p>
-                    {content.split(";").map((item, key) => {
+                    {(split ? content.split(";") : content).map((item, key) => {
                         return (
-                            <span key={key}>
+                            <span
+                                key={key}
+                                className={
+                                    type === "workout-details" && " text-sm"
+                                }
+                            >
                                 {item}
                                 <br />
                             </span>

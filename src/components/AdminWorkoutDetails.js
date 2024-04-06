@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -6,8 +6,35 @@ import axios from "axios";
 const AdminWorkoutDetails = () => {
     const params = useParams();
     const [rows, setRows] = useState([
-        { name: "", sets: "", reps: "", weight: "", rest: "" },
+        { name: "", sets: 0, reps: 0, weight: 0, rest: "" },
     ]);
+    const [workoutInfo, setWorkoutInfo] = useState({ title: "", date: "" });
+
+    useEffect(() => {
+        axios
+            .get(
+                "http://localhost:3001/api/workout/details/" +
+                    params.workoutID +
+                    "/" +
+                    params.userID,
+                { withCredentials: true }
+            )
+            .then((res) => {
+                console.log(res.data);
+                if (res.status === 200) {
+                    setRows(res.data.exercises);
+                    setWorkoutInfo({
+                        title: res.data.title,
+                        date: res.data.date,
+                    });
+                } else {
+                    console.log("Error fetching workout details");
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
 
     const handleAddRow = () => {
         setRows([
@@ -29,23 +56,29 @@ const AdminWorkoutDetails = () => {
         setRows(updatedRows);
     };
     const handleSave = () => {
-        const workout = {exercises: rows };
-        axios.post(
-
-            "http://localhost:3001/api/workout/exercise/update/" + params.workoutID,
-            {exercises:workout},
-            { withCredentials: true }
-        ).then((res) => {
-            if (res.status === 200) {
-                alert("Workout saved successfully");
-            } else {
-                alert("Error saving workout");
-            }
-        });
+        axios
+            .post(
+                "http://localhost:3001/api/workout/details/update/" +
+                    params.workoutID +
+                    "/" +
+                    params.userID,
+                { exercises: rows },
+                { withCredentials: true }
+            )
+            .then((res) => {
+                if (res.status === 200) {
+                    console.log(rows)
+                    alert("Workout saved successfully");
+                } else {
+                    alert("Error saving workout");
+                }
+            });
     };
 
     return (
-        <div className="container mx-auto">
+        <>
+            <h1 className="text-3xl font-bold">Workout:{workoutInfo.title}</h1>
+            <h2 className="text-xl font-bold">Date:{workoutInfo.date}</h2>
             <table className="table-auto">
                 <thead>
                     <tr>
@@ -128,7 +161,7 @@ const AdminWorkoutDetails = () => {
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
                 onClick={handleSave}
             />
-        </div>
+        </>
     );
 };
 

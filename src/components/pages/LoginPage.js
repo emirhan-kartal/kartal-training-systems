@@ -11,12 +11,13 @@ const LoginPage = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
     const [isAuthenticated, loading, setIsAuthenticated] = useAuth();
+    const [buttonEnabled, setButtonEnabled] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (isAuthenticated) {
             navigate("/dashboard");
-            console.log("navigate")
+            console.log("navigate");
         }
     }, [loading]);
     if (loading)
@@ -41,6 +42,7 @@ const LoginPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log("butona tıklandı");
         //send request to server with axios
         axios
             .post(
@@ -54,18 +56,23 @@ const LoginPage = () => {
                 }
             )
             .then((response) => {
+                console.log(response.status + "response var");
                 if (response.status === 200) {
-                    console.log("navigated to dashboard")
+                    console.log("navigated to dashboard");
                     setIsAuthenticated(true);
                     navigate("/dashboard");
+                } else if (response.status === 401) {
+                    setIsAuthenticated(false);
+                    setError(true);
                 }
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error + "error var");
                 setIsAuthenticated(false);
                 setError(true);
             });
     };
+    console.log(error);
 
     return (
         <section className="flex flex-col justify-center items-center h-screen gap-y-12 py-12">
@@ -95,12 +102,24 @@ const LoginPage = () => {
                 className="h-1/2 w-11/12 sm:w-1/2 md:w-1/3 lg:w-1/4
                 brounded-xl flex flex-col gap-y-8 items-center"
             >
-
-                <InputCard type="text" placeholder="Username" value={username} onChange={handleUsernameChange} icon={faDumbbell}/>
-                <InputCard type="password" placeholder="Password" value={password} onChange={handlePasswordChange} icon={faLock}/>
+                <InputCard
+                    type="text"
+                    placeholder="Username"
+                    value={username}
+                    onChange={handleUsernameChange}
+                    icon={faDumbbell}
+                />
+                <InputCard
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                    icon={faLock}
+                />
                 <button
                     type="submit"
                     className=" text-white rounded-[2rem] h-14 w-11/12 text-lg font-bold transition duration-300 hover:scale-105 bg-red-special"
+                    
                 >
                     Sign In
                 </button>

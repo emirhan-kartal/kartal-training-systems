@@ -16,6 +16,7 @@ const AdminUserList = () => {
                 if (res.status === 200) {
                     setUsers(res.data);
                     console.log(res.data);
+                    console.log(res.data);
                 }
             });
     }, []);
@@ -46,14 +47,23 @@ const AdminUserList = () => {
             <table className="min-w-full bg-white">
                 <thead>
                     <tr>
-                        <th className="py-2 px-4 border-b border-gray-200 text-start" key="id">
+                        <th
+                            className="py-2 px-4 border-b border-gray-200 text-start"
+                            key="id"
+                        >
                             ID
                         </th>
-                        <th className="py-2 px-4 border-b border-gray-200 text-start" key="name">
+                        <th
+                            className="py-2 px-4 border-b border-gray-200 text-start"
+                            key="name"
+                        >
                             Name
                         </th>
 
-                        <th className="py-2 px-4 border-b border-gray-200 text-start" key="missing-workouts">
+                        <th
+                            className="py-2 px-4 border-b border-gray-200 text-start"
+                            key="missing-workouts"
+                        >
                             Missing Workouts
                         </th>
                     </tr>
@@ -73,12 +83,13 @@ const AdminUserList = () => {
                             <td className="py-2 px-4 border-b border-gray-200">
                                 {user.username}
                             </td>
-                            
+
                             <td className="py-2 px-4 border-b border-gray-200">
+                                {console.log(user.workouts)}
                                 {
-                                    user.workouts.map((workout) => {
-                                        if (workout.isCompleted === false)
-                                            return workout;
+                                    Object.keys(users).map((e) => {
+                                        if (users[e].isCompleted === false)
+                                            return users[e];
                                     }).length
                                 }
                             </td>

@@ -30,9 +30,13 @@ function App() {
         "/dashboard",
         "/workouts",
         "/settings",
-        "/workout",
+        "/workout/",
     ];
-    const renderingCondition = headerFooterRendering.includes(location.pathname);
+    const renderingCondition =
+        headerFooterRendering.some((path) =>
+            location.pathname.includes(path)
+        ) && !location.pathname.includes("/admin");
+
     const NotFound = () => {
         return (
             <>
@@ -81,7 +85,7 @@ function App() {
                             }
                         />
                         <Route
-                            path="/admin/workout-details/:workoutID"
+                            path="/admin/workout-details/:workoutID/:userID"
                             element={
                                 <AdminPanel>
                                     <AdminWorkoutDetails />
