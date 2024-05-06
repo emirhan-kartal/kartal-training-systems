@@ -6,11 +6,11 @@ import { faDumbbell, faLock } from "@fortawesome/free-solid-svg-icons";
 import image from "../../images/guy1_4.png";
 import InputCard from "../InputCard";
 
+const callback = (response) => {};
 const LoginPage = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState(false);
-    const [isAuthenticated, loading, setIsAuthenticated] = useAuth();
+    const { isAuthenticated, loading, setIsAuthenticated, login,error} = useAuth();
     const [buttonEnabled, setButtonEnabled] = useState(false);
     const navigate = useNavigate();
 
@@ -42,9 +42,11 @@ const LoginPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(username+"=username")
+        login(username,password);
         console.log("butona tıklandı");
         //send request to server with axios
-        axios
+        /* axios
             .post(
                 "http://localhost:3001/login/",
                 {
@@ -70,9 +72,8 @@ const LoginPage = () => {
                 console.log(error + "error var");
                 setIsAuthenticated(false);
                 setError(true);
-            });
+            }); */
     };
-    console.log(error);
 
     return (
         <section className="flex flex-col justify-center items-center h-screen gap-y-12 py-12">
@@ -119,7 +120,6 @@ const LoginPage = () => {
                 <button
                     type="submit"
                     className=" text-white rounded-[2rem] h-14 w-11/12 text-lg font-bold transition duration-300 hover:scale-105 bg-red-special"
-                    
                 >
                     Sign In
                 </button>

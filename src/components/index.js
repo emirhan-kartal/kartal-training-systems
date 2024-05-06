@@ -19,3 +19,6 @@ export { default as AdminWorkoutDetails } from "./AdminWorkoutDetails";
 export { default as RegisterPage } from "./pages/RegisterPage";
 export { default as AdminPanel } from "./pages/AdminPanel";
 export { default as InputCard } from "./InputCard";
+export { default as SpinningAnimation } from "./SpinningAnimation";
+export { default as ProfilePictureUpload } from "./ProfilePictureUpload";
+export { default as useUploadProfileHook } from "./api/UploadProfileHook";

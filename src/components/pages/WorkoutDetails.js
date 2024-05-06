@@ -13,6 +13,8 @@ const WorkoutDetails = () => {
         setWorkout({ ...workout, feedback: e.target.value })
     };
     const navigate = useNavigate();
+
+    
     useEffect(() => {
         axios
             .get("http://localhost:3001/workout/" + params.id, {
@@ -23,6 +25,7 @@ const WorkoutDetails = () => {
                 setWorkout(response.data);
             });
     }, []);
+    
     const submitFeedback = () => {
         axios
             .post(

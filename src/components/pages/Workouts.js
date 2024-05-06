@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { ContentCard } from "../index";
+import { ContentCard, SpinningAnimation } from "../index";
 import { CurrentPageContext } from "../CurrentPageContext";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 const Workouts = () => {
     const { setCurrentPage, setChosenButton } = useContext(CurrentPageContext);
     const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         setCurrentPage("Workouts");
         setChosenButton(1);
@@ -17,6 +18,7 @@ const Workouts = () => {
                 { withCredentials: true }
             )
             .then((response) => {
+                setIsLoading(false);
                 console.log(response.data);
                 const data = response.data;
                 setData(data.reverse());
@@ -27,7 +29,9 @@ const Workouts = () => {
             <h1 className="text-5xl font-bold">Workouts</h1>
             <hr />
 
-            {data.length === 0 ? (
+            {isLoading ? (
+                <SpinningAnimation />
+            ) : data.length === 0 ? (
                 <h1 className="text-3xl font-semibold mt-4">
                     You have not workouts assigned yet.
                 </h1>

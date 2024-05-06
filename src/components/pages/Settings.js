@@ -1,16 +1,18 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Card from "../Card";
 import {
     faRightFromBracket,
-    faChevronRight,
     faQuestion,
     faList,
+    faCamera,
+    faCameraAlt,
+    faCameraRetro,
 } from "@fortawesome/free-solid-svg-icons";
 import ProfilePageButton from "../ProfilePageButton";
 import { useContext, useEffect } from "react";
 import { CurrentPageContext } from "../CurrentPageContext";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ProfilePictureUpload from "../ProfilePictureUpload";
 
 const Settings = () => {
     const { setCurrentPage, setChosenButton } = useContext(CurrentPageContext);
@@ -20,8 +22,9 @@ const Settings = () => {
     }, []);
     const email = Cookies.get("email");
     return (
-        <section className="flex flex-col items-center p-5 h-[85vh]">
-            <div className="w-32 h-32 rounded-full bg-gray-300"></div>
+        <section className="flex flex-col items-center p-5 min-h-[85vh]">
+            <ProfilePictureUpload />
+
             <h1 className="text-2xl font-bold mt-4">Emirhan Kartal</h1>
             <p className="text-lg font-semibold mt-2 mb-12">User</p>
             <div className="flex flex-col w-full px-6 font-semibold">
@@ -39,7 +42,7 @@ const Settings = () => {
                 </div>
             </div>
             {/* Add your settings components here */}
-            <div className="w-full mt-auto">
+            <div className="w-full my-auto">
                 <ProfilePageButton text="Support" icon={faQuestion} />
 
                 <Link to="/workouts">

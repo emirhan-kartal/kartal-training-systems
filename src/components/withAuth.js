@@ -5,12 +5,14 @@ import { useAuth } from "./AuthHook";
 const withAuth = (Component, admin = false) => {
     return function WrappedComponent(props) {
         const navigate = useNavigate();
-        const [isAuthenticated, loading, x, isAdmin] = useAuth();
+        const { isAuthenticated, loading, isAdmin } = useAuth();
         useEffect(() => {
+            console.log(isAuthenticated);
             if (
                 (!isAuthenticated && !loading) ||
                 (admin && !isAdmin && isAuthenticated)
             ) {
+
                 navigate("/");
             }
         }, [loading, isAuthenticated]);

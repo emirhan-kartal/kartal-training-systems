@@ -13,7 +13,7 @@ const RegisterPage = () => {
     const [password, setPassword] = useState("");
     const [passwordRepeat, setPasswordRepeat] = useState("");
     const [error, setError] = useState("");
-    const [isAuthenticated, loading, setIsAuthenticated] = useAuth();
+    const {isAuthenticated, loading, setIsAuthenticated} = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {

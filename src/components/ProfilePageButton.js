@@ -5,9 +5,10 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 const ProfilePageButton = ({ icon, text }) => {
     return (
-        <Card title="" className="h-8 w-10/12 p-8">
+        <Card title="" className="min-h-12 w-10/12 p-8">
             <FontAwesomeIcon
                 className="flex-grow"
+        
                 icon={icon}
             ></FontAwesomeIcon>
             <div className="flex-grow-[4]">{text}</div>
